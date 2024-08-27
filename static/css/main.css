@@ -1,0 +1,29 @@
+.container{
+    /*background-color: #0a58ca;*/
+    width: 200vw;
+    margin-top: 10%;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+form{
+    background-color: darkgreen;
+    width: 50vw;
+    margin-left: 10%;
+    height: 35vh;
+}
+
+h1{
+    text-align: center;
+    padding: 20px 0;
+}
+
+.form-floating {
+    margin: 0 10vw;
+}
+
+.btn{
+    margin-top: 2%;
+    margin-left: 44%;
+    width: 7vw;
+}
