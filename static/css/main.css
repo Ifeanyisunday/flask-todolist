@@ -10,7 +10,7 @@ form{
     background-color: darkgreen;
     width: 50vw;
     margin-left: 10%;
-    height: 35vh;
+    height: 37vh;
 }
 
 h1{
@@ -26,4 +26,15 @@ h1{
     margin-top: 2%;
     margin-left: 44%;
     width: 7vw;
+}
+
+.tag_signup{
+    text-align: center;
+    margin: -45px 0 0 -70px;
+    font-size: 20px;
+
+}
+
+.container1{
+    background-color: #0a3622;
 }
