@@ -7,15 +7,20 @@
     <form action="{{ url_for('register') }}" method="POST" class="rounded-4">
       <h1>Sign up</h1>
       <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="username" name="username" placeholder="username">
+        <input type="text" class="form-control" id="username" name="username" placeholder="username">
           <label for="username">Username</label>
       </div>
+
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="email" name="email" placeholder="email">
+            <label for="username">Email</label>
+        </div>
       <div class="form-floating">
         <input type="password" class="form-control" id="password" name="password" placeholder="Password">
           <label for="password">Password</label>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <p class="tag_signup">Already have an account? <a href="login.html" style="color: #1a1d20">login</a> </p>
+    <p class="tag_signup">Already have an account? <a href="{{ url_for('login') }}" style="color: white">login</a> </p>
 </div>
 {% endblock %}

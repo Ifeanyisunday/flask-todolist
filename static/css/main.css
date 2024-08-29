@@ -1,6 +1,8 @@
+/*signup and login start*/
+
 .container{
-    /*background-color: #0a58ca;*/
     width: 200vw;
+    height: 10vh;
     margin-top: 10%;
     gap: 2rem;
     justify-content: space-between;
@@ -10,12 +12,13 @@ form{
     background-color: darkgreen;
     width: 50vw;
     margin-left: 10%;
-    height: 37vh;
+    height: 50vh;
 }
 
-h1{
+.container form h1{
     text-align: center;
-    padding: 20px 0;
+    padding: 30px 0;
+    color: white;
 }
 
 .form-floating {
@@ -23,18 +26,80 @@ h1{
 }
 
 .btn{
-    margin-top: 2%;
+    margin-top: 3%;
     margin-left: 44%;
     width: 7vw;
 }
 
 .tag_signup{
+    color: white;
     text-align: center;
-    margin: -45px 0 0 -70px;
+    margin: -58px 0 0 -70px;
     font-size: 20px;
-
 }
 
-.container1{
-    background-color: #0a3622;
+.login-container{
+    width: 200vw;
+    height: 10vh;
+    margin-top: 10%;
+    gap: 2rem;
+    justify-content: space-between;
 }
+
+.login-container #login{
+    background-color: darkgreen;
+    width: 50vw;
+    margin-left: 12%;
+    height: 37vh;
+}
+
+.login-container #login h1{
+    text-align: center;
+    padding: 30px 0;
+    color: white;
+}
+
+
+
+
+
+/*signup and login ends*/
+
+/*index starts*/
+.navbar .container2{
+    background-color: #bdc2c9;
+    width: 70vw;
+    height: 30vh;
+    margin-top: 10%;
+    margin-left: 15%;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.mybtn{
+    width: 15vw;
+    height: 10vh;
+    margin: 8%;
+    border-color: white;
+    border-radius: 15px;
+    font-size: 30px;
+}
+
+.mybtn1{
+    width: 15vw;
+    height: 10vh;
+    border-color: white;
+    border-radius: 15px;
+    font-size: 30px;
+}
+
+.mybtn2{
+    width: 15vw;
+    height: 10vh;
+    margin-left: 7%;
+    border-color: white;
+    border-radius: 15px;
+    font-size: 30px;
+}
+
+/*index ends*/
