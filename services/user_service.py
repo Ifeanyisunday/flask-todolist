@@ -1,38 +1,33 @@
-from db_models import db, User
+from flask_login import current_user, login_required, login_user, logout_user
+from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, redirect, url_for, session, flash, request
+from initialize_db import User, database
 
-
-class User_service:
-    @staticmethod
-    def register_users(username, email, password):
+class UserService:
+    def register_user(self, username, email, password):
         user = User(username, email, password)
-        db.session.add(user)
-        db.session.commit()
+        database.session.add(user)
+        database.session.commit()
+        return "User Registered"
+
+    # def login_user(self, email, password):
+    #     user = User.query.filter_by(email=email, password=password).first()
+    #     if user and user.password == password:
+    #         login_user(user)
+    #         flash("Logged in successfully", "success")
+    #         return render_template("taskdashboard.html")
+    #     else:
+    #         return "Wrong username or password"
+
+    def logout_user(self):
+            logout_user()
+            return redirect(url_for('home'))
+    def get_userid(self, user_id):
+        return User.query.get(int(user_id))
 
 
-    @staticmethod
-    def login_user(username, password):
-        mydb = mysql.connector.connect(
-            host="127.0.0.1",
-            user="root",
-            passwd="vitalspring10",
-            port='3306',
-            database="todoapp"
-        )
-
-        database = mydb.cursor()
-        query = 'SELECT * FROM users WHERE username = %s and password = %s'
-        values = (username, password)
-        database.execute(query, values)
-        user = database.fetchone()
-        if user[1] == username:
-            if user[3] == 0:
-                database = mydb.cursor()
-                query = 'UPDATE users SET is_logged_in = %s WHERE username = %s'
-                values = (1, username)
-                database.execute(query, values)
-                mydb.commit()
-                database.close()
-                mydb.close()
-                return "you are now logged in"
-        else:
-            return "User not found or you are offline"
+class TaskService:
+    def create_task(self, task):
+        database.session.add(task)
+        database.session.commit()
+        return "Task Created"
