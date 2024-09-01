@@ -60,9 +60,6 @@ form{
 }
 
 
-
-
-
 /*signup and login ends*/
 
 /*index starts*/
@@ -106,5 +103,35 @@ form{
 
 /*task_page starts*/
 .task_container{
+    background-color: darkgreen;
+    height: 100vh;
+}
 
+.task_container .task-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: stretch;
+    gap: 0.5rem;
+    justify-content: space-evenly;
+}
+
+.task_container .task-div .div1{
+    background-color: white;
+    margin-top: 17%;
+    scale: 3;
+}
+
+.h1-task{
+    text-align: center;
+    color: white;
+}
+
+h2{
+    text-align: center;
+    background-color: white;
+}
+
+.task-bar{
+    margin-left: 25%;
 }

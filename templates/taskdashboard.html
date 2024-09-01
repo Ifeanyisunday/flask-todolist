@@ -2,6 +2,25 @@
 
 {% block body %}
     <div class="task_container">
-        <h2>Create Task</h2>
+        <h1 class="h1-task">Hi, {{ username }}!</h1>
+        <h2>Create task for the day</h2>
+        <form action="{{ url_for('addtasks') }}" method="POST" class="task-bar">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="title" name="title" placeholder="title">
+                <label for="title">title</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="description" name="description" placeholder="description">
+                <label for="description">description</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+
+        {% for task in tasks %}
+            <li>{{ task }}</li>
+        {% endfor %}
+        <a href= "{{ url_for('logout') }}">Logout</a>
+        </div>
     </div>
 {% endblock %}

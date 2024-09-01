@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, LoginManager
+from datetime import datetime
 
 database = SQLAlchemy()
 
@@ -20,7 +21,7 @@ def create_app():
 
 
 class User(UserMixin, database.Model):
-    password_hash = database.Column(database.String(128))
+    password_hash = database.Column(database.String(80))
 
     @property
     def password(self):
@@ -34,7 +35,6 @@ class User(UserMixin, database.Model):
         return check_password_hash(self.password_hash, password)
 
     __table_name__ = 'users'
-
     id = database.Column(database.Integer, primary_key=True)
     username = database.Column(database.String(80), unique=True, nullable=False)
     email = database.Column(database.String(120), unique=True, nullable=False)
@@ -50,20 +50,20 @@ class User(UserMixin, database.Model):
         return f"{self.username}"
 
 
-
 class Task(database.Model):
     __table_name__ = 'tasks'
     id = database.Column(database.Integer, primary_key=True)
     title = database.Column(database.String(80), unique=True, nullable=False)
     description = database.Column(database.Text, nullable=False)
     done = database.Column(database.Boolean, default=False)
+    date_created = database.Column(database.DateTime, default=datetime.utcnow)
     user_id = database.Column(database.Integer, database.ForeignKey('user.id'), nullable=False)
 
-    def __init__(self, title, description, done, user_id):
+    def __init__(self, title, description, user_id):
         self.title = title
         self.description = description
-        self.done = done
         self.user_id = user_id
+        self.done = False
 
     def __repr__(self):
         return f"Task {self.title}", f"Done: {self.done}"
