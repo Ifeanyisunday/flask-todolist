@@ -109,10 +109,15 @@ def addtasks():
             if request.method == 'POST':
                 title = request.form.get('title')
                 description = request.form.get('description')
-                task = Task(title=title, description=description, user_id=user.id)
-                database.session.add(task)
-                database.session.commit()
-                return render_template('taskdashboard.html', message=f"{user.username} you just added {title} as new task")
+                task1 = Task(title=title, description=description, user_id=user.id)
+                task = Task.query.filter_by(title=title).first()
+                if task:
+                    return render_template('taskdashboard.html', message=f"{user.username} you added this Task already")
+                else:
+                    database.session.add(task1)
+                    database.session.commit()
+                    return render_template('taskdashboard.html', message=f"{user.username} you just added {title} as new task")
+
 
 @app.route('/updatetasks', methods=['POST'])
 def updatetasks():
