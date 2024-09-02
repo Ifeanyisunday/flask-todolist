@@ -28,6 +28,14 @@ def load_user(user_id):
 with app.app_context():
     database.create_all()
 
+@app.route("/menu")
+def menu():
+    return render_template('index.html')
+
+@app.route("/update_page")
+def update_page():
+    return render_template('update.html')
+
 
 @app.route("/")
 def home():
@@ -60,9 +68,8 @@ def register():
             return render_template('signup.html')
         else:
             userservice.register_user(username, email, password)
-            login_user(user, remember=True)
             session['email'] = email
-            return render_template("taskdashboard.html", username=username)
+            return render_template("taskdashboard.html", message=f"{username} you are registered")
     else:
         flash("User already registered", "success")
         return render_template('index.html')
@@ -78,7 +85,7 @@ def user_login():
             login_user(user)
             session['email'] = email
             flash("Logged in successfully", "success")
-            return render_template('taskdashboard.html', username=user.username)
+            return render_template('taskdashboard.html', message=f"{user.username} you are logged in")
         else:
             return render_template('signup.html')
 
@@ -89,25 +96,38 @@ def logout():
     userservice.logout_user()
     return render_template('index.html')
 
+
 @app.route('/tasks', methods=['GET', 'POST'])
 def tasks():
     tasks = Task.query.all()
 
-tasks = []
 @app.route('/addtasks', methods=['POST'])
-@login_required
 def addtasks():
-    if request.method == 'POST':
-        title = request.form.get('title')
-        description = request.form.get('description')
-        task = Task.query.filter_by(title=title, description=description).first()
-        if task:
-            return render_template('taskdashboard.html')
-        else:
-            task = Task(title=title, description=description, user_id=current_user.id)
-            database.session.add(task)
-            database.session.commit()
-            tasks.append(task)
+    if "email" in session:
+        user = User.query.filter_by(email=session['email']).first()
+        if user:
+            if request.method == 'POST':
+                title = request.form.get('title')
+                description = request.form.get('description')
+                task = Task(title=title, description=description, user_id=user.id)
+                database.session.add(task)
+                database.session.commit()
+                return render_template('taskdashboard.html', message=f"{user.username} you just added {title} as new task")
+
+@app.route('/updatetasks', methods=['POST'])
+def updatetasks():
+    if "email" in session:
+        user = User.query.filter_by(email=session['email']).first()
+        if user:
+            if request.method == 'POST':
+                previous_title = request.form.get('previous_title')
+                task = Task.query.filter_by(title=previous_title).first()
+                if task:
+                    title = request.form.get('title')
+                    description = request.form.get('description')
+                    task = Task(title=title, description=description, user_id=user.id)
+                    database.session.commit()
+                    return render_template('update.html', message=f"{user.username} you just updated to {title} as new task")
 
 
 @app.route('/tasks/<int:task_id>', methods=['GET', 'POST'])

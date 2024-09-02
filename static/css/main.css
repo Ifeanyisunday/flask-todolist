@@ -135,3 +135,10 @@ h2{
 .task-bar{
     margin-left: 25%;
 }
+
+.back_to_menu{
+    color: red;
+    text-align: center;
+    margin: -65px 0 0 20%;
+    font-size: 20px;
+}
